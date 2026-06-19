@@ -101,8 +101,21 @@ export default function App() {
   const [isBooted, setIsBooted] = useState(false);
   const [activeView, setActiveView] = useState('HOME');
   const [isAdminOpen, setIsAdminOpen] = useState(false);
-  const { coreSkills, featuredProjects, showcaseProjects, educationData } = usePortfolio();
+  const { coreSkills, featuredProjects, showcaseProjects, educationData, aboutMe } = usePortfolio();
   const isScrolling = useRef(false);
+
+  // Sync favicon with profile photo
+  useEffect(() => {
+    if (aboutMe?.profileImage) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = aboutMe.profileImage;
+    }
+  }, [aboutMe?.profileImage]);
 
   // Dynamically generate views based on current data lengths
   const VIEWS = useMemo(() => [
