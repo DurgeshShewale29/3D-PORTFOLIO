@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;600&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;600&display=swap');
+
+:root {
+  --color-bg: #010409;
+  --color-primary: #00f3ff;
+  --color-accent: #ff00ff;
+  --color-text: #e0f2fe;
+  --color-text-muted: #7dd3fc;
+  --color-panel-bg: rgba(2, 8, 16, 0.6);
+  --color-panel-border: rgba(0, 243, 255, 0.4);
+  
+  --font-header: 'Teko', sans-serif;
+  --font-main: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  overflow: hidden; 
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Base Panel Style */
+.hud-panel {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.1), inset 0 0 10px rgba(0, 243, 255, 0.05);
+  position: relative;
+  /* Simple clipped corners */
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--color-primary);
+  opacity: 0.5;
+}
+
+/* Specialized container for the 3D Html transform elements to ensure they don't block clicks unnecesssarily */
+.html-3d-container {
+  pointer-events: none;
+}
+.html-3d-container > * {
+  pointer-events: auto;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 2px; }
+
+/* Progress bars */
+.progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* 2D Overlay Layout for TopNav */
+.hud-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+  padding: 1.5rem;
+}
+.hud-overlay > * { pointer-events: auto; }
+
+/* React PDF Canvas Fixes */
+.react-pdf-page-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+.react-pdf-page-custom canvas {
+  max-width: 100% !important;
+  max-height: 60vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+  border-radius: 8px !important;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+}

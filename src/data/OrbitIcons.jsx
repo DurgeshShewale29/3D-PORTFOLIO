@@ -1,0 +1,52 @@
+import { 
+  SiPython, SiJavascript, SiCplusplus, SiC, SiPostgresql, SiHtml5,
+  SiPytorch, SiTensorflow, SiReact, SiNodedotjs, SiFastapi, SiGo, SiRust,
+  SiDocker, SiKubernetes, SiGit, SiLinux, SiTerraform, SiGooglecloud,
+  SiMongodb, SiRedis, SiGraphql, SiTypescript, SiVuedotjs,
+  SiAngular, SiTailwindcss, SiNextdotjs, SiDjango, SiFlask,
+  SiVim, SiFigma, SiGithub, SiGitlab, SiOpenai, SiFirebase
+} from 'react-icons/si';
+
+import { FaAws, FaJava, FaPhp, FaMicrosoft } from 'react-icons/fa';
+
+export const ORBIT_ICONS = {
+  'Python': SiPython,
+  'JavaScript': SiJavascript,
+  'TypeScript': SiTypescript,
+  'C': SiC,
+  'C++': SiCplusplus,
+  'Java': FaJava,
+  'Go': SiGo,
+  'Rust': SiRust,
+  'PHP': FaPhp,
+  'SQL': SiPostgresql,
+  'MongoDB': SiMongodb,
+  'Firebase': SiFirebase,
+  'Redis': SiRedis,
+  'HTML/CSS': SiHtml5,
+  'React': SiReact,
+  'Next.js': SiNextdotjs,
+  'Vue.js': SiVuedotjs,
+  'Angular': SiAngular,
+  'Tailwind': SiTailwindcss,
+  'Node.js': SiNodedotjs,
+  'FastAPI': SiFastapi,
+  'Django': SiDjango,
+  'Flask': SiFlask,
+  'GraphQL': SiGraphql,
+  'PyTorch': SiPytorch,
+  'TensorFlow': SiTensorflow,
+  'OpenAI': SiOpenai,
+  'AWS': FaAws,
+  'Google Cloud': SiGooglecloud,
+  'Azure': FaMicrosoft,
+  'Docker': SiDocker,
+  'Kubernetes': SiKubernetes,
+  'Terraform': SiTerraform,
+  'Git': SiGit,
+  'GitHub': SiGithub,
+  'GitLab': SiGitlab,
+  'Linux': SiLinux,
+  'Vim': SiVim,
+  'Figma': SiFigma
+};
