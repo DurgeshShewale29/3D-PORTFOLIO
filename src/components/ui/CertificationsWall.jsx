@@ -31,13 +31,13 @@ export const CERT_ICONS = {
   'Network': Network
 };
 
-function Hexagon({ data, position, color, isBg, onSelect, isModalOpen }) {
+function Hexagon({ data, position, color, isBg, onSelect, isModalOpen, isActive }) {
   const [hovered, setHovered] = useState(false);
   const groupRef = useRef();
   useCursor(!isBg && hovered);
 
   useFrame((state, delta) => {
-    if (isBg) return;
+    if (isBg || !isActive) return;
     const targetZ = hovered ? 4 : 0;
     groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, delta * 8);
   });
@@ -123,10 +123,11 @@ function Hexagon({ data, position, color, isBg, onSelect, isModalOpen }) {
   );
 }
 
-export default function CertificationsWall({ isBooted }) {
+export default function CertificationsWall({ isBooted, activeView }) {
   const { certifications } = usePortfolio();
   const [selectedCert, setSelectedCert] = useState(null);
   const [pdfBlobUrl, setPdfBlobUrl] = useState(null);
+  const isActive = activeView === 'CERTIFICATIONS';
 
   // Convert Data URI to Blob URI so Chrome respects PDF viewer hash parameters (#view=Fit)
   useEffect(() => {
@@ -202,6 +203,7 @@ export default function CertificationsWall({ isBooted }) {
             color={hexColor}
             onSelect={setSelectedCert}
             isModalOpen={!!selectedCert}
+            isActive={isActive}
           />
         );
       } else {

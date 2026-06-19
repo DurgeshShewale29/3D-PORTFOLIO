@@ -6,11 +6,12 @@ import * as THREE from 'three';
 import { ORBIT_ICONS } from '../../data/OrbitIcons';
 import { usePortfolio } from '../../context/PortfolioContext';
 
-function ComplexCore() {
+function ComplexCore({ isActive }) {
   const coreRef = useRef();
   const innerRef = useRef();
   
   useFrame((state, delta) => {
+    if (!isActive) return;
     coreRef.current.rotation.z -= delta * 0.2;
     innerRef.current.rotation.z += delta * 0.5;
   });
@@ -153,10 +154,11 @@ const SkillNode = ({ skill, x, y, color, cssColor, IconComponent }) => {
   );
 };
 
-function OrbitalRing({ radius, speed, color, cssColor, skills }) {
+function OrbitalRing({ radius, speed, color, cssColor, skills, isActive }) {
   const ringRef = useRef();
   
   useFrame((state, delta) => {
+    if (!isActive) return;
     // Rotate around Z axis so it spins like a wheel facing the camera
     ringRef.current.rotation.z += delta * speed;
   });
@@ -168,8 +170,8 @@ function OrbitalRing({ radius, speed, color, cssColor, skills }) {
         <meshBasicMaterial color={color} toneMapped={false} />
       </Torus>
 
-      {/* Orbiting Skills */}
-      {skills.map((skill, index) => {
+      {/* Orbiting Skills - Html badges only mounted when SKILLS view is active */}
+      {isActive && skills.map((skill, index) => {
         const angle = (index / skills.length) * Math.PI * 2;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
@@ -191,15 +193,16 @@ function OrbitalRing({ radius, speed, color, cssColor, skills }) {
   );
 }
 
-export default function SkillOrbit({ isBooted }) {
+export default function SkillOrbit({ isBooted, activeView }) {
   const { orbitSkills } = usePortfolio();
+  const isActive = activeView === 'SKILLS';
 
   if (!isBooted) return null;
 
   return (
     <group position={[300, 0, 0]}>
       {/* Central Cyberpunk Reactor Core */}
-      <ComplexCore />
+      <ComplexCore isActive={isActive} />
       
       {/* Inner Ring (Core Languages) */}
       <OrbitalRing 
@@ -207,7 +210,8 @@ export default function SkillOrbit({ isBooted }) {
         speed={0.15} 
         color={[0, 1.5, 1.5]} 
         cssColor="#00ffff"
-        skills={orbitSkills.inner || []} 
+        skills={orbitSkills.inner || []}
+        isActive={isActive}
       />
       
       {/* Middle Ring (AI & Frameworks) */}
@@ -216,7 +220,8 @@ export default function SkillOrbit({ isBooted }) {
         speed={-0.1} 
         color={[2, 0, 1]} 
         cssColor="#ff00ff"
-        skills={orbitSkills.middle || []} 
+        skills={orbitSkills.middle || []}
+        isActive={isActive}
       />
       
       {/* Outer Ring (Cloud & Tools) */}
@@ -225,7 +230,8 @@ export default function SkillOrbit({ isBooted }) {
         speed={0.05} 
         color={[0, 1.5, 1.5]} 
         cssColor="#00ffff"
-        skills={orbitSkills.outer || []} 
+        skills={orbitSkills.outer || []}
+        isActive={isActive}
       />
     </group>
   );

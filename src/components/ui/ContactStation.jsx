@@ -26,10 +26,6 @@ export default function ContactStation({ isBooted, activeView }) {
   const { messages, setMessages, socialLinks, aboutMe } = usePortfolio();
   // Refs removed as we are replacing the relay with the globe
 
-  useFrame((state, delta) => {
-    // Empty frame hook
-  });
-
   if (!isBooted) return null;
 
   return (

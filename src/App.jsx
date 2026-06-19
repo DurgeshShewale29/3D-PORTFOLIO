@@ -89,10 +89,10 @@ function AnimatedStarfield() {
 
   return (
     <group ref={groupRef}>
-      <Stars radius={400} depth={200} count={15000} factor={6} saturation={0} fade />
+      <Stars radius={400} depth={200} count={8000} factor={6} saturation={0} />
       {/* Sparkles guarantee explicit size/opacity pulsing */}
-      <Sparkles count={500} scale={600} size={6} speed={0.05} opacity={0.6} color="#00ffff" />
-      <Sparkles count={500} scale={600} size={4} speed={0.08} opacity={0.4} color="#ff00ff" />
+      <Sparkles count={250} scale={600} size={6} speed={0.05} opacity={0.6} color="#00ffff" />
+      <Sparkles count={250} scale={600} size={4} speed={0.08} opacity={0.4} color="#ff00ff" />
     </group>
   );
 }
@@ -173,7 +173,7 @@ export default function App() {
 
   return (
     <>
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 20], fov: 50 }} style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0 }}>
+      <Canvas dpr={[1, 1.2]} camera={{ position: [0, 0, 20], fov: 50 }} style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0 }}>
         <color attach="background" args={['#010409']} />
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={2} color="#00f3ff" />
@@ -207,12 +207,12 @@ export default function App() {
           {/* Epic Deep-Dive Project Showcase */}
           <ProjectShowcase isBooted={isBooted} activeView={activeView} />
 
-          <SkillOrbit isBooted={isBooted} />
-          <CertificationsWall isBooted={isBooted} />
+          <SkillOrbit isBooted={isBooted} activeView={activeView} />
+          <CertificationsWall isBooted={isBooted} activeView={activeView} />
           <ContactStation isBooted={isBooted} activeView={activeView} />
 
           <EffectComposer>
-            <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} height={300} intensity={1.5} />
+            <Bloom luminanceThreshold={0.35} luminanceSmoothing={0.9} height={200} intensity={1.2} />
           </EffectComposer>
         </Suspense>
       </Canvas>
