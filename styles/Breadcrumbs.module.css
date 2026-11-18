@@ -1,0 +1,24 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 1.25rem;
+  background: var(--main-bg, #12131a);
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  user-select: none;
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.separator {
+  flex-shrink: 0;
+  color: #64748b;
+  font-size: 0.75rem;
+}

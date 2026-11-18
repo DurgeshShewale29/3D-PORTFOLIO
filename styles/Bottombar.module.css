@@ -1,0 +1,59 @@
+.bottomBar {
+  background: var(--bottombar-bg, #007acc);
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--bottombar-text, #ffffff);
+  border-top: 1px solid var(--bottombar-border, #0066aa);
+  user-select: none;
+  position: relative;
+  z-index: 40;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.55rem;
+  height: 100%;
+  cursor: pointer;
+  color: inherit;
+  transition: background-color 0.15s;
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.section:hover {
+  background-color: var(--bottombar-hover-bg, rgba(255, 255, 255, 0.15));
+}
+
+.icon {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.petalsButton {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .container:first-child > .section:nth-child(n + 3) {
+    display: none;
+  }
+  .container:last-child > .section:not(.petalsButton) {
+    display: none;
+  }
+}

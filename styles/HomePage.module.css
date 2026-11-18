@@ -1,0 +1,281 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: var(--main-bg);
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.5rem 3rem 3rem;
+  max-width: 1100px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Hero Identity Section */
+.identitySection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentCode {
+  color: var(--green, #4ec9b0);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.titleFirstName {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  color: #ffffff;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.titleLastName {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--pink, #ff6fd8);
+  letter-spacing: -2px;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 25px rgba(255, 111, 216, 0.4);
+}
+
+.underlineGlow {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink, #ff6fd8), transparent);
+  border-radius: 2px;
+}
+
+/* Avatar Ring */
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-right: 7.5rem;
+  margin-top: 2.25rem;
+}
+
+.avatarRing {
+  background: linear-gradient(135deg, var(--pink, #ff6fd8), var(--blue, #38bdf8), var(--green, #4ec9b0));
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 165px;
+  height: 165px;
+  padding: 3px;
+  animation: avatarFloat 4s ease-in-out infinite;
+  box-shadow: 0 0 32px rgba(255, 111, 216, 0.28);
+  position: relative;
+}
+
+.avatarRingInner {
+  background: var(--main-bg, #12131a);
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  letter-spacing: -1px;
+  text-shadow: 0 0 20px var(--pink, #ff6fd8);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 800;
+}
+
+
+@keyframes avatarFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(1deg);
+  }
+}
+
+/* Badges Row */
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.rowBreak {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0;
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #d1d5db;
+  transition: all 0.2s ease;
+}
+
+.pillBadge:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.craftsmanBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(78, 201, 176, 0.3);
+  background: rgba(78, 201, 176, 0.08);
+  color: var(--green, #4ec9b0);
+  border-radius: 4px;
+}
+
+/* Tagline & Bio */
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bioDescription {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+  max-width: 680px;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.highlight {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--button-bg, #007acc);
+  color: #ffffff;
+  padding: 0.65rem 1.4rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 122, 204, 0.3);
+}
+
+.primaryBtn:hover {
+  background-color: #0066aa;
+  box-shadow: 0 4px 20px rgba(0, 122, 204, 0.5);
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #e2e8f0;
+  padding: 0.65rem 1.4rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1.25rem 2.5rem;
+  }
+
+  .identitySection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .avatarWrapper {
+    margin-right: 0;
+    margin-top: 0;
+  }
+
+  .avatarRing {
+    width: 105px;
+    height: 105px;
+  }
+
+  .avatarRingInner {
+    font-size: 2.2rem;
+  }
+}

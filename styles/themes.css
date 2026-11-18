@@ -1,0 +1,222 @@
+/* Default: Durgesh Dark (Cyberpunk Sakura VSCode Theme) */
+:root,
+[data-theme='durgesh-dark'] {
+  --main-bg: #12131a;
+  --bg-text: rgba(255, 111, 216, 0.04);
+  --text-color: #e2e8f0;
+  --accent-color: #ff6fd8;
+  --accent-color-rgb: 255, 111, 216;
+  --pink: #ff6fd8;
+  --pink-neon: #ff2a85;
+  --blue: #38bdf8;
+  --blue2: #007acc;
+  --green: #4ec9b0;
+  --titlebar-bg: #0d0e14;
+  --sidebar-bg: #14151e;
+  --sidebar-hover-bg: #1d1e2b;
+  --explorer-bg: #101117;
+  --explorer-hover-bg: #181923;
+  --explorer-border: #1e202e;
+  --tabs-bg: #0c0d12;
+  --tab-bg: #13141c;
+  --tab-active-bg: #181a24;
+  --tab-border: #222434;
+  --bottombar-bg: #007acc;
+  --bottombar-text: #ffffff;
+  --bottombar-border: #0066aa;
+  --button-bg: #007acc;
+  --button-text: #ffffff;
+  --bottombar-hover-bg: #1a8ad6;
+  --scrollbar-track-bg: #101117;
+  --scrollbar-thumb-bg: #27293a;
+  --article-bg: #14151e;
+  --terminal-bg: #0e0f15;
+  --terminal-header-bg: #13141c;
+  --terminal-border: #1e202e;
+  --calendar-empty: #1e202e;
+}
+
+/* Kyoto Sakura */
+[data-theme='kyoto-sakura'] {
+  --main-bg: #161218;
+  --bg-text: rgba(255, 117, 160, 0.06);
+  --text-color: #fce7f3;
+  --accent-color: #ff75a0;
+  --accent-color-rgb: 255, 117, 160;
+  --pink: #ff75a0;
+  --pink-neon: #ff2a85;
+  --blue: #70d6ff;
+  --blue2: #d946ef;
+  --green: #86efac;
+  --titlebar-bg: #100d12;
+  --sidebar-bg: #19141c;
+  --sidebar-hover-bg: #261f2a;
+  --explorer-bg: #140f17;
+  --explorer-hover-bg: #201824;
+  --explorer-border: #2a2030;
+  --tabs-bg: #100d13;
+  --tab-bg: #18131c;
+  --tab-active-bg: #211a26;
+  --tab-border: #2a2030;
+  --bottombar-bg: #ec4899;
+  --bottombar-text: #ffffff;
+  --bottombar-border: #db2777;
+  --button-bg: #ec4899;
+  --button-text: #ffffff;
+  --bottombar-hover-bg: #f472b6;
+  --scrollbar-track-bg: #140f17;
+  --scrollbar-thumb-bg: #3b2a43;
+  --article-bg: #19141c;
+  --terminal-bg: #120e15;
+  --terminal-header-bg: #19141c;
+  --terminal-border: #2a2030;
+  --calendar-empty: #2a2030;
+}
+
+/* Tokyo Night */
+[data-theme='tokyo-night'] {
+  --main-bg: #1a1b26;
+  --bg-text: #1f2335;
+  --text-color: #a9b1d6;
+  --accent-color: #7aa2f7;
+  --accent-color-rgb: 122, 162, 247;
+  --pink: #f7768e;
+  --pink-neon: #ff007f;
+  --blue: #7dcfff;
+  --blue2: #7aa2f7;
+  --green: #9ece6a;
+  --titlebar-bg: #13131c;
+  --sidebar-bg: #16161e;
+  --sidebar-hover-bg: #1f2335;
+  --explorer-bg: #16161e;
+  --explorer-hover-bg: #1f2335;
+  --explorer-border: #24283b;
+  --tabs-bg: #13131c;
+  --tab-bg: #16161e;
+  --tab-active-bg: #1a1b26;
+  --tab-border: #24283b;
+  --bottombar-bg: #7aa2f7;
+  --bottombar-text: #1a1b26;
+  --bottombar-border: #565f89;
+  --button-bg: #7aa2f7;
+  --button-text: #1a1b26;
+  --bottombar-hover-bg: #89b4fa;
+  --scrollbar-track-bg: #16161e;
+  --scrollbar-thumb-bg: #292e42;
+  --article-bg: #16161e;
+  --terminal-bg: #16161e;
+  --terminal-header-bg: #13131c;
+  --terminal-border: #24283b;
+  --calendar-empty: #24283b;
+}
+
+/* GitHub Dark */
+[data-theme='github-dark'] {
+  --main-bg: #24292e;
+  --bg-text: rgba(56, 58, 61, 0.35);
+  --text-color: #efefef;
+  --accent-color: #f9826c;
+  --accent-color-rgb: 249, 130, 108;
+  --pink: #ff6fd8;
+  --pink-neon: #ff2a85;
+  --blue: #4fc1ff;
+  --blue2: #007acc;
+  --green: #4ec9b0;
+  --titlebar-bg: #1f2428;
+  --sidebar-bg: #24292e;
+  --sidebar-hover-bg: #1f2428;
+  --explorer-bg: #1f2428;
+  --explorer-hover-bg: #24292e;
+  --explorer-border: #161a1d;
+  --tabs-bg: #1f2428;
+  --tab-bg: #1f2428;
+  --tab-active-bg: #24292e;
+  --tab-border: #24292e;
+  --bottombar-bg: #24292e;
+  --bottombar-text: #ffffff;
+  --bottombar-border: #1b1f23;
+  --button-bg: #176f2c;
+  --button-text: #dcffe4;
+  --bottombar-hover-bg: #4f4f52;
+  --scrollbar-track-bg: #24292e;
+  --scrollbar-thumb-bg: #333536;
+  --article-bg: #1f2428;
+  --terminal-bg: #1f2428;
+  --terminal-header-bg: #1f2428;
+  --terminal-border: #1b1f23;
+  --calendar-empty: #2f363d;
+}
+
+/* Dracula */
+[data-theme='dracula'] {
+  --main-bg: #282a36;
+  --bg-text: #313340;
+  --text-color: #efefef;
+  --accent-color: #bd93f9;
+  --accent-color-rgb: 189, 147, 249;
+  --pink: #ff79c6;
+  --pink-neon: #ff2a85;
+  --blue: #8be9fd;
+  --blue2: #6272a4;
+  --green: #50fa7b;
+  --titlebar-bg: #1e1f29;
+  --sidebar-bg: #343746;
+  --sidebar-hover-bg: #3c3d51;
+  --explorer-bg: #21222c;
+  --explorer-hover-bg: #313241;
+  --explorer-border: #161a1d;
+  --tabs-bg: #191a21;
+  --tab-bg: #21222c;
+  --tab-active-bg: #282a36;
+  --tab-border: #191a21;
+  --bottombar-bg: #191a21;
+  --bottombar-text: #f8f8f2;
+  --bottombar-border: #191a21;
+  --button-bg: #bd93f9;
+  --button-text: #282a36;
+  --bottombar-hover-bg: #4f4f52;
+  --scrollbar-track-bg: #282a36;
+  --scrollbar-thumb-bg: #454647;
+  --article-bg: #21222c;
+  --terminal-bg: #21222c;
+  --terminal-header-bg: #191a21;
+  --terminal-border: #191a21;
+  --calendar-empty: #3c3d51;
+}
+
+/* Nord */
+[data-theme='nord'] {
+  --main-bg: #2e3440;
+  --bg-text: #3b4252;
+  --text-color: #eceff4;
+  --accent-color: #88c0d0;
+  --accent-color-rgb: 136, 192, 208;
+  --pink: #b48ead;
+  --pink-neon: #d08770;
+  --blue: #88c0d0;
+  --blue2: #81a1c1;
+  --green: #a3be8c;
+  --titlebar-bg: #242933;
+  --sidebar-bg: #2e3440;
+  --sidebar-hover-bg: #3b4252;
+  --explorer-bg: #2e3440;
+  --explorer-hover-bg: #3b4252;
+  --explorer-border: #3b4252;
+  --tabs-bg: #242933;
+  --tab-bg: #2e3440;
+  --tab-active-bg: #3b4252;
+  --tab-border: #242933;
+  --bottombar-bg: #5e81ac;
+  --bottombar-text: #eceff4;
+  --bottombar-border: #4c566a;
+  --button-bg: #88c0d0;
+  --button-text: #2e3440;
+  --bottombar-hover-bg: #81a1c1;
+  --scrollbar-track-bg: #2e3440;
+  --scrollbar-thumb-bg: #434c5e;
+  --article-bg: #2e3440;
+  --terminal-bg: #242933;
+  --terminal-header-bg: #2e3440;
+  --terminal-border: #3b4252;
+  --calendar-empty: #3b4252;
+}

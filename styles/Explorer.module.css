@@ -1,0 +1,152 @@
+.explorer {
+  background: var(--explorer-bg, #101117);
+  width: 230px;
+  min-width: 200px;
+  color: #cbd5e1;
+  font-family: var(--font-mono, monospace);
+  border-right: 1px solid var(--explorer-border, #1e202e);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
+  height: 100%;
+}
+
+.title {
+  padding: 0.65rem 1rem 0.4rem;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 1.2px;
+  color: #94a3b8;
+}
+
+.treeSection {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  color: #e2e8f0;
+}
+
+.chevron {
+  font-size: 0.8rem;
+  transition: transform 0.15s;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.files {
+  padding: 0.2rem 0;
+}
+
+.file {
+  padding: 0.35rem 1rem 0.35rem 1.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.file p {
+  margin-left: 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file:hover {
+  background: var(--explorer-hover-bg, #181923);
+  color: #ffffff;
+}
+
+.activeFile {
+  background: var(--explorer-hover-bg, #181923);
+  color: #ffffff;
+  border-left: 2px solid var(--accent-color, #ff6fd8);
+}
+
+.bottomWidgets {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.copilotBadge {
+  background: rgba(255, 111, 216, 0.08);
+  border: 1px solid rgba(255, 111, 216, 0.3);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copilotBadge:hover {
+  background: rgba(255, 111, 216, 0.16);
+  border-color: var(--pink, #ff6fd8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 111, 216, 0.2);
+}
+
+.copilotHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.copilotName {
+  flex: 1;
+}
+
+.aiTag {
+  background: rgba(255, 111, 216, 0.2);
+  color: var(--pink, #ff6fd8);
+  font-size: 0.6rem;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.copilotDesc {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  margin: 4px 0 0;
+}
+
+.gitStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  padding: 0 0.25rem;
+}
+
+.gitIcon {
+  color: var(--blue, #38bdf8);
+}
+
+.gitDiff {
+  margin-left: auto;
+  color: #4ec9b0;
+  font-size: 0.7rem;
+}

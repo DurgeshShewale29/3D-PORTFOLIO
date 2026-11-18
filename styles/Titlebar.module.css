@@ -1,0 +1,214 @@
+.titlebar {
+  background: var(--titlebar-bg, #0d0e14);
+  height: 36px;
+  padding: 0 0.85rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  color: #a0a5b5;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+  position: relative;
+  z-index: 40;
+  gap: 1rem;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.macControls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.macClose,
+.macMinimize,
+.macMaximize {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.macClose {
+  background-color: #ff5f56;
+}
+
+.macMinimize {
+  background-color: #ffbd2e;
+}
+
+.macMaximize {
+  background-color: #27c93f;
+}
+
+.macClose:hover,
+.macMinimize:hover,
+.macMaximize:hover {
+  opacity: 0.8;
+}
+
+.menuItems {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.menuItem {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: color 0.15s, background-color 0.15s;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.menuItem:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.copilotMenu {
+  color: #ff6fd8 !important;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 111, 216, 0.1);
+  border: 1px solid rgba(255, 111, 216, 0.25);
+  transition: all 0.2s;
+}
+
+.copilotMenu:hover {
+  background: rgba(255, 111, 216, 0.2);
+  color: #ffffff !important;
+}
+
+.centerSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchCapsule {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 14px;
+  color: #94a3b8;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 250px;
+  justify-content: center;
+}
+
+.searchCapsule:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 111, 216, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 111, 216, 0.15);
+}
+
+.searchIcon {
+  color: var(--blue, #38bdf8);
+}
+
+.searchText {
+  letter-spacing: 0.5px;
+}
+
+.shortcutKey {
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  color: #cbd5e1;
+}
+
+.rightSection {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quickCopilotBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  font-family: var(--font-sans, -apple-system, sans-serif);
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quickCopilotBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.quickCopilotBtnActive {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+.quickCopilotBtnActive .copilotBtnIcon {
+  color: #38bdf8;
+}
+
+.copilotBtnIcon {
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+@media (max-width: 900px) {
+  .menuItems {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .titlebar {
+    grid-template-columns: auto 1fr;
+  }
+  .rightSection {
+    display: none;
+  }
+  .searchCapsule {
+    min-width: 160px;
+    font-size: 0.7rem;
+  }
+}

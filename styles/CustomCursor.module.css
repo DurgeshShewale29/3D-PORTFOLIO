@@ -1,0 +1,63 @@
+.cursorContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 999999;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.crosshairSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Clean, subtle pink glow - never flares or flashes */
+  filter: drop-shadow(0 0 2px rgba(255, 111, 216, 0.65));
+  transition: transform 0.1s ease-out;
+}
+
+.centerDot {
+  fill: #ff6fd8;
+}
+
+.crosshairLine {
+  stroke: #ff6fd8;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Hovering over clickable items (links, buttons, files) */
+/* No rotation, no bright white flash, stays authentic pink */
+.hovering .crosshairSvg {
+  transform: none;
+  filter: drop-shadow(0 0 2px rgba(255, 111, 216, 0.65));
+}
+
+.hovering .centerDot {
+  fill: #ff6fd8;
+}
+
+.hovering .crosshairLine {
+  stroke: #ff6fd8;
+}
+
+/* Clicking / Mouse down state: subtle 10% press feedback, no extra glow */
+.clicking .crosshairSvg {
+  transform: scale(0.9);
+  filter: drop-shadow(0 0 2px rgba(255, 111, 216, 0.65));
+}
+
+/* Automatically disabled on touch / mobile screens */
+@media (pointer: coarse) {
+  .cursorContainer {
+    display: none !important;
+  }
+}
