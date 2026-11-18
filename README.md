@@ -2,10 +2,13 @@
 
 An interactive, Visual Studio Code-themed developer portfolio engineered with **Next.js 16**, **React 19**, and **TypeScript**, showcasing enterprise engineering, multi-modal AI systems, and Lakehouse pipelines.
 
+🌐 **Live Portfolio**: [https://durgesh-3d--portfolio.vercel.app](https://durgesh-3d--portfolio.vercel.app)
+
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tests](https://img.shields.io/badge/Tests-25%20Passing-brightgreen?style=flat-square)](https://nodejs.org/)
+[![Live Demo](https://img.shields.io/badge/Live-durgesh--3d----portfolio.vercel.app-blueviolet?style=flat-square&logo=vercel)](https://durgesh-3d--portfolio.vercel.app)
 
 ---
 
