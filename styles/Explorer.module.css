@@ -74,6 +74,10 @@
   color: #ffffff;
 }
 
+.file:active {
+  background: rgba(255, 111, 216, 0.18);
+}
+
 .activeFile {
   background: var(--explorer-hover-bg, #181923);
   color: #ffffff;

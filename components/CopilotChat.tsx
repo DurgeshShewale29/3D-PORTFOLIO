@@ -30,6 +30,8 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [streamingId, setStreamingId] = useState<string | null>(null);
+  const typingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -40,7 +42,16 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
     if (isOpen) {
       scrollToBottom();
     }
-  }, [isOpen, messages]);
+  }, [isOpen, messages, streamingId]);
+
+  // Clean up typing timer on unmount
+  useEffect(() => {
+    return () => {
+      if (typingTimerRef.current) {
+        clearInterval(typingTimerRef.current);
+      }
+    };
+  }, []);
 
   // Support closing with Escape key
   useEffect(() => {
@@ -52,6 +63,44 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
+
+  // Typewriter streaming animation for Copilot answers
+  const streamBotResponse = (fullReply: string) => {
+    setIsTyping(false);
+    const botMsgId = `b-${Date.now()}`;
+
+    // Add empty message for bot
+    setMessages(prev => [...prev, { id: botMsgId, sender: 'copilot', text: '' }]);
+    setStreamingId(botMsgId);
+
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
+    }
+
+    let charIndex = 0;
+    // Dynamic chunk size so short answers feel natural and long answers finish in ~1.5s - 2.5s
+    const chunkSize = Math.max(2, Math.ceil(fullReply.length / 80));
+
+    typingTimerRef.current = setInterval(() => {
+      charIndex += chunkSize;
+      if (charIndex >= fullReply.length) {
+        if (typingTimerRef.current) {
+          clearInterval(typingTimerRef.current);
+          typingTimerRef.current = null;
+        }
+        setMessages(prev =>
+          prev.map(m => (m.id === botMsgId ? { ...m, text: fullReply } : m))
+        );
+        setStreamingId(null);
+      } else {
+        const currentSlice = fullReply.slice(0, charIndex);
+        setMessages(prev =>
+          prev.map(m => (m.id === botMsgId ? { ...m, text: currentSlice } : m))
+        );
+      }
+      scrollToBottom();
+    }, 16);
+  };
 
   const handleSend = async (userText: string) => {
     if (!userText.trim()) return;
@@ -77,11 +126,7 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
       if (response.ok) {
         const data = await response.json();
         if (data.reply) {
-          setMessages(prev => [
-            ...prev,
-            { id: `b-${Date.now()}`, sender: 'copilot', text: data.reply },
-          ]);
-          setIsTyping(false);
+          streamBotResponse(data.reply);
           return;
         }
       }
@@ -90,12 +135,8 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
     // Fallback to instant local knowledge engine
     setTimeout(() => {
       const replyText = answerQueryLocally(userText);
-      setMessages(prev => [
-        ...prev,
-        { id: `b-${Date.now()}`, sender: 'copilot', text: replyText },
-      ]);
-      setIsTyping(false);
-    }, 300);
+      streamBotResponse(replyText);
+    }, 280);
   };
 
   const handleChipClick = (chipText: string) => {
@@ -103,6 +144,12 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
   };
 
   const handleClear = () => {
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
+      typingTimerRef.current = null;
+    }
+    setStreamingId(null);
+    setIsTyping(false);
     setMessages([
       {
         id: 'welcome-reset',
@@ -113,127 +160,150 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
   };
 
   return (
-    <aside 
-      className={`${styles.copilotOverlay} ${isOpen ? styles.copilotOverlayOpen : ''}`}
-      aria-hidden={!isOpen}
-    >
-      {/* Header */}
-      <div className={styles.header}>
-        <div className={styles.headerTitle}>
-          <VscLayoutSidebarRight size={15} className={styles.headerIcon} />
-          <span>Copilot</span>
-        </div>
-        <div className={styles.headerActions}>
-          <button
-            type="button"
-            className={styles.actionBtn}
-            onClick={handleClear}
-            title="Clear Chat History"
-          >
-            <VscClearAll size={16} />
-          </button>
-          <button
-            type="button"
-            className={styles.actionBtn}
-            onClick={onClose}
-            title="Close Panel (Esc)"
-          >
-            <VscClose size={18} />
-          </button>
-        </div>
-      </div>
+    <>
+      {/* Dimmed backdrop to focus on Copilot overlay and smooth click-away */}
+      <div
+        className={`${styles.backdrop} ${isOpen ? styles.backdropOpen : ''}`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-      {/* Messages */}
-      <div className={styles.messagesList}>
-        {messages.map(msg => (
-          <div key={msg.id} className={styles.messageRow}>
-            <div
-              className={`${styles.senderLabel} ${
-                msg.sender === 'user' ? styles.userLabel : styles.botLabel
-              }`}
+      <aside 
+        className={`${styles.copilotOverlay} ${isOpen ? styles.copilotOverlayOpen : ''}`}
+        aria-hidden={!isOpen}
+      >
+        {/* Header */}
+        <div className={styles.header}>
+          <div className={styles.headerTitle}>
+            <VscLayoutSidebarRight size={15} className={styles.headerIcon} />
+            <span>Copilot</span>
+          </div>
+          <div className={styles.headerActions}>
+            <button
+              type="button"
+              className={styles.actionBtn}
+              onClick={handleClear}
+              title="Clear Chat History"
             >
-              <span>{msg.sender === 'user' ? 'You' : 'Copilot'}</span>
-            </div>
-            <div
-              className={`${styles.bubble} ${
-                msg.sender === 'user' ? styles.userBubble : styles.botBubble
-              }`}
+              <VscClearAll size={16} />
+            </button>
+            <button
+              type="button"
+              className={styles.actionBtn}
+              onClick={onClose}
+              title="Close Panel (Esc)"
             >
-              {msg.text.split('\n\n').map((para, i) => (
-                <p key={i} dangerouslySetInnerHTML={{
-                  __html: para
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;">$1</a>')
-                    .replace(/\n/g, '<br />')
-                }} />
-              ))}
-            </div>
+              <VscClose size={18} />
+            </button>
           </div>
-        ))}
+        </div>
 
-        {isTyping && (
-          <div className={styles.messageRow}>
-            <div className={`${styles.senderLabel} ${styles.botLabel}`}>
-              <span>Copilot</span>
+        {/* Messages */}
+        <div className={styles.messagesList}>
+          {messages.map(msg => (
+            <div key={msg.id} className={styles.messageRow}>
+              <div
+                className={`${styles.senderLabel} ${
+                  msg.sender === 'user' ? styles.userLabel : styles.botLabel
+                }`}
+              >
+                <span>{msg.sender === 'user' ? 'You' : 'Copilot'}</span>
+              </div>
+              <div
+                className={`${styles.bubble} ${
+                  msg.sender === 'user' ? styles.userBubble : styles.botBubble
+                }`}
+              >
+                {msg.text ? (
+                  msg.text.split('\n\n').map((para, i, arr) => (
+                    <p key={i}>
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: para
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            .replace(
+                              /\[(.*?)\]\((.*?)\)/g,
+                              '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;">$1</a>'
+                            )
+                            .replace(/\n/g, '<br />'),
+                        }}
+                      />
+                      {streamingId === msg.id && i === arr.length - 1 && (
+                        <span className={styles.blinkingCursor}>▍</span>
+                      )}
+                    </p>
+                  ))
+                ) : (
+                  <span className={styles.blinkingCursor}>▍</span>
+                )}
+              </div>
             </div>
-            <div className={`${styles.bubble} ${styles.botBubble}`}>
-              <span className={styles.typingDot} />
-              <span className={styles.typingDot} />
-              <span className={styles.typingDot} />
+          ))}
+
+          {isTyping && (
+            <div className={styles.messageRow}>
+              <div className={`${styles.senderLabel} ${styles.botLabel}`}>
+                <span>Copilot</span>
+              </div>
+              <div className={`${styles.bubble} ${styles.botBubble}`}>
+                <span className={styles.typingDot} />
+                <span className={styles.typingDot} />
+                <span className={styles.typingDot} />
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Suggestion Queries (Exactly 4 clean pills on initial view) */}
-        {messages.length <= 2 && (
-          <div className={styles.chipsContainer}>
-            <span className={styles.chipsLabel}>Suggested questions</span>
-            <div className={styles.chipsGrid}>
-              {SUGGESTED_CHIPS.map(chip => (
-                <button
-                  key={chip}
-                  type="button"
-                  className={styles.chipBtn}
-                  onClick={() => handleChipClick(chip)}
-                >
-                  <span>{chip}</span>
-                  <VscArrowRight size={12} className={styles.chipArrow} />
-                </button>
-              ))}
+          {/* Suggestion Queries (Exactly 4 clean pills on initial view) */}
+          {messages.length <= 2 && (
+            <div className={styles.chipsContainer}>
+              <span className={styles.chipsLabel}>Suggested questions</span>
+              <div className={styles.chipsGrid}>
+                {SUGGESTED_CHIPS.map(chip => (
+                  <button
+                    key={chip}
+                    type="button"
+                    className={styles.chipBtn}
+                    onClick={() => handleChipClick(chip)}
+                  >
+                    <span>{chip}</span>
+                    <VscArrowRight size={12} className={styles.chipArrow} />
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div ref={messagesEndRef} />
-      </div>
+          <div ref={messagesEndRef} />
+        </div>
 
-      {/* Input */}
-      <div className={styles.inputArea}>
-        <form
-          className={styles.inputForm}
-          onSubmit={e => {
-            e.preventDefault();
-            handleSend(input);
-          }}
-        >
-          <input
-            type="text"
-            className={styles.inputField}
-            placeholder="Ask a question about Durgesh..."
-            value={input}
-            onChange={e => setInput(e.target.value)}
-          />
-          <button
-            type="submit"
-            className={styles.sendBtn}
-            disabled={!input.trim() || isTyping}
-            title="Send"
+        {/* Input */}
+        <div className={styles.inputArea}>
+          <form
+            className={styles.inputForm}
+            onSubmit={e => {
+              e.preventDefault();
+              handleSend(input);
+            }}
           >
-            <VscSend size={14} />
-          </button>
-        </form>
-        <span className={styles.inputHint}>Press Enter to send</span>
-      </div>
-    </aside>
+            <input
+              type="text"
+              className={styles.inputField}
+              placeholder="Ask a question about Durgesh..."
+              value={input}
+              onChange={e => setInput(e.target.value)}
+            />
+            <button
+              type="submit"
+              className={styles.sendBtn}
+              disabled={!input.trim() || isTyping || !!streamingId}
+              title="Send"
+            >
+              <VscSend size={14} />
+            </button>
+          </form>
+          <span className={styles.inputHint}>Press Enter to send</span>
+        </div>
+      </aside>
+    </>
   );
 }
