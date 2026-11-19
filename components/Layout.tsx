@@ -244,9 +244,6 @@ const Layout = ({ children }: LayoutProps) => {
           <Tabsbar />
           {!showEmptyEditor && <Breadcrumbs />}
           <div className={styles.editorWithTerminal}>
-            <div key={`progress-${pathname}`} className={styles.progressBarTrack} aria-hidden="true">
-              <div className={styles.progressBarFill} />
-            </div>
             <main
               id="main-editor"
               className={styles.content}
