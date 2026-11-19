@@ -38,16 +38,6 @@ const Layout = ({ children }: LayoutProps) => {
   const lastPanelRef = useRef<SidePanel>('explorer');
   const [chordKey, setChordKey] = useState<string | null>(null);
   const chordTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [isPageLoading, setIsPageLoading] = useState(false);
-
-  useEffect(() => {
-    // Trigger smooth scanning animation on route/page switch
-    setIsPageLoading(true);
-    const timer = setTimeout(() => {
-      setIsPageLoading(false);
-    }, 420);
-    return () => clearTimeout(timer);
-  }, [pathname]);
 
   const toggleTerminal = useCallback(() => {
     setIsTerminalOpen(prev => !prev);
@@ -254,11 +244,9 @@ const Layout = ({ children }: LayoutProps) => {
           <Tabsbar />
           {!showEmptyEditor && <Breadcrumbs />}
           <div className={styles.editorWithTerminal}>
-            {isPageLoading && (
-              <div className={styles.progressBarTrack} aria-hidden="true">
-                <div className={styles.progressBarFill} />
-              </div>
-            )}
+            <div key={`progress-${pathname}`} className={styles.progressBarTrack} aria-hidden="true">
+              <div className={styles.progressBarFill} />
+            </div>
             <main
               id="main-editor"
               className={styles.content}

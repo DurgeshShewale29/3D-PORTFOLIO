@@ -3,8 +3,7 @@
   inset: 0;
   top: 36px;
   bottom: 24px;
-  background: rgba(8, 9, 14, 0.45);
-  backdrop-filter: blur(2px);
+  background: rgba(8, 9, 14, 0.55);
   z-index: 48;
   opacity: 0;
   visibility: hidden;

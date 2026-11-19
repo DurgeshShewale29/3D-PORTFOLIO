@@ -78,7 +78,7 @@ export default function SakuraPetals() {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
 
-    const petalCount = width < 768 ? 22 : 40;
+    const petalCount = width < 768 ? 14 : 24;
     const createPetal = (initialY?: number): Petal => ({
       x: Math.random() * width,
       y: initialY === undefined ? Math.random() * -100 : initialY,
@@ -191,8 +191,8 @@ export default function SakuraPetals() {
         height: '100vh',
         pointerEvents: 'none',
         userSelect: 'none',
-        zIndex: 35,
-        opacity: 0.95,
+        zIndex: 5,
+        opacity: 0.9,
       }}
     />
   );

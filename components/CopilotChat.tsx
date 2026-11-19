@@ -78,8 +78,8 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
     }
 
     let charIndex = 0;
-    // Dynamic chunk size so short answers feel natural and long answers finish in ~1.5s - 2.5s
-    const chunkSize = Math.max(2, Math.ceil(fullReply.length / 80));
+    // 30 FPS typing updates (32ms interval) cuts React re-renders in half for butter-smooth 60/120 FPS UI
+    const chunkSize = Math.max(3, Math.ceil(fullReply.length / 45));
 
     typingTimerRef.current = setInterval(() => {
       charIndex += chunkSize;
@@ -99,7 +99,7 @@ export default function CopilotChat({ isOpen, onClose }: CopilotChatProps) {
         );
       }
       scrollToBottom();
-    }, 16);
+    }, 32);
   };
 
   const handleSend = async (userText: string) => {
